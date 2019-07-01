@@ -1,0 +1,37 @@
+# Install ionic globally with npm
+npm install -g ionic
+
+# List all available templates
+ionic start --list
+
+# Start an App
+ionic start comic sidemenu
+
+# Install http plugin
+ionic cordova plugin add cordova-plugin-advanced-http
+npm install @ionic-native/http
+
+# Install storage plugin
+ionic cordova plugin add cordova-sqlite-storage
+npm install --save @ionic/storage
+
+# Run the App
+ionic serve
+
+# Generating new features
+ionic generate
+
+# Help
+ionic g --help
+
+#Generating a release build for Android
+ionic cordova build android --prod --release
+
+#Generating Keystore
+keytool -genkey -v -keystore comic.keystore -keyalg RSA -keysize 2048 -validity 10000 -alias comic
+
+#Sign
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore comic.keystore platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk comic
+
+#Verify
+jarsigner -verify -verbose platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk

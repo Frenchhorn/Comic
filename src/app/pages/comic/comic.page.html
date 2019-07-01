@@ -1,0 +1,68 @@
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-segment scrollable [(ngModel)]="segment">
+      <ion-segment-button value="favorites">Favorites</ion-segment-button>
+      <ion-segment-button value="download">Download</ion-segment-button>
+    </ion-segment>
+    <ion-buttons slot="end">
+      <ion-button (click)="this.segment = 'search'">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="primary" [hidden]="segment !== 'search'">
+    <ion-searchbar #searchBar animated="true" [(ngModel)]="queryText" placeholder="Search" (keyup.enter)="doSearch()"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content (ionScrollEnd)="loadSearchResults();">
+  <ion-list>
+    <ion-grid fixed [hidden]="segment !== 'favorites'">
+      <ion-row>
+        <ion-col size="4" *ngFor="let favorite of favorites">
+          <ion-card routerLink="/detail/{{favorite.source}}/{{favorite.cid}}">
+            <ion-img [src]="favorite.cover"></ion-img>
+            <ion-card-subtitle>{{favorite?.title}}</ion-card-subtitle>
+            <ion-card-subtitle>{{favorite?.source | sourceName}}</ion-card-subtitle>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid fixed [hidden]="segment !== 'download'">
+      <ion-row>
+        <ion-col size="4" *ngFor="let download of downloads">
+          <ion-card routerLink="/download/{{download.source}}/{{download.cid}}">
+            <ion-img [src]="download.cover"></ion-img>
+            <ion-card-subtitle>{{download?.title}}</ion-card-subtitle>
+            <ion-card-subtitle>{{download?.source | sourceName}}</ion-card-subtitle>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-item-group [hidden]="segment !== 'search'">
+      <ion-item *ngFor="let result of searchResults" routerLink="/detail/{{result.source}}/{{result.cid}}">
+        <ion-thumbnail slot="start">
+          <img [src]="result?.cover">
+        </ion-thumbnail>
+        <ion-label>
+          <h3>{{result?.title}}</h3>
+          <p>{{result?.author}}</p>
+          <p>{{result?.source | sourceName}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" [hidden]="segment !== 'favorites'">
+    <ion-fab-button (click)="updateFavorites();"><ion-icon name="refresh"></ion-icon></ion-fab-button>
+  </ion-fab>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" [hidden]="segment !== 'download'">
+    <ion-fab-button (click)="startDownload();"><ion-icon name="play"></ion-icon></ion-fab-button>
+  </ion-fab>
+  <ion-fab slot="fixed" vertical="center" horizontal="end" [hidden]="segment !== 'search'">
+    <ion-fab-button (click)="doSearch();"><ion-icon name="search"></ion-icon></ion-fab-button>
+  </ion-fab>
+</ion-content>

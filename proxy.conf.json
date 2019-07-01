@@ -1,0 +1,34 @@
+{
+  "/dmzj/comicsum/*": {
+    "target": "http://s.acg.dmzj.com/comicsum",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/dmzj/comicsum": ""
+    }
+  },
+  "/dmzj/comic/*": {
+    "target": "http://v2.api.dmzj.com/comic",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/dmzj/comic": ""
+    }
+  },
+  "/dmzj2/search/*": {
+    "target": "http://v2.api.dmzj.com/search",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/dmzj2/search": ""
+    }
+  },
+  "/dmzj2/info/*": {
+    "target": "http://m.dmzj.com/info",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/dmzj2/info": ""
+    }
+  }
+}
