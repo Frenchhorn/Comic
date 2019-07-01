@@ -1,9 +1,46 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>{{comic?.title.length > 8 ? comic?.title.slice(0, 8) + '..' : comic?.title}}</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/comic">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>详情</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-item lines="none" color="primary">
+        <ion-thumbnail slot="start">
+          <img [src]="comic?.cover">
+        </ion-thumbnail>
+        <ion-label>
+          <h3>{{comic?.title}}</h3>
+          <p class="author">{{comic?.author}}</p>
+          <p class="description" [style.-webkit-box-orient]="'vertical'">{{comic?.description}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <p>
+          <span [style.font-size.px]="10" [style.float]="'left'">{{comic?.finish ? '已完结' : '连载中'}}</span>
+          <span *ngIf="comic?.update" [style.font-size.px]="10" [style.float]="'right'">最后更新：{{comic?.update}}</span>
+        </p>
+      </ion-list>
+      <ion-list>
+        <ion-grid fixed="true">
+          <ion-row>
+            <ion-col align-self-center size="3" sizeMd="2" *ngFor="let chapter of comic?.chapters">
+              <ion-button size="small" shape="round"
+                          [fill]="chapter.name === comic.chapter ? 'solid' : 'outline'" 
+                          [color]="chapter.name === comic.chapter ? '' : 'medium'">{{chapter.name}}</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

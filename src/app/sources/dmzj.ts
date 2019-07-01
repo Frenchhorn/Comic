@@ -6,6 +6,7 @@ import { DMZJ } from '../constants/api';
 import { Comic } from '../interface/comic';
 import { Source } from '../constants/source';
 import { setSearchResults, setComicDetail } from '../functions/cache';
+import { HTTP } from '@ionic-native/http/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,10 @@ import { setSearchResults, setComicDetail } from '../functions/cache';
 export class Dmzj {
   private source = Source.DMZJ;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private http2: HTTP
+  ) {
   }
 
   search(keyword: string): Observable<any> {
@@ -55,7 +59,6 @@ export class Dmzj {
     return this.http.get(url).pipe(
       timeout(10000),
       map((item) => {
-        console.log(item);
         return this.saveComicItem(cid, item);
       }),
       catchError(err => {
@@ -67,13 +70,15 @@ export class Dmzj {
 
   saveComicItem(cid, item) {
     const comic: Comic = {
+      title: item.title,
+      author: item.authors.map(author => author.tag_name).join('/'),
+      description: item.description,
+      cover: item.cover,
       source: this.source,
       cid: String(item.id),
-      title: item.title,
-      cover: item.cover,
-      author: item.authors.map(author => author.tag_name).join('/')
     };
     setComicDetail(this.source, comic);
+    console.log('[saveComicItem]', comic);
     return comic;
   }
 }

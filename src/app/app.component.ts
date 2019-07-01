@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
+import { File } from '@ionic-native/file/ngx';
 import { Storage } from '@ionic/storage';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -14,12 +15,12 @@ import { initConfig } from './functions/config';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Comic',
+      title: '漫画',
       url: '/comic',
       icon: 'book'
     },
     {
-      title: 'Sources',
+      title: '图源',
       url: '/list',
       icon: 'apps'
     }
@@ -29,7 +30,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private storage: Storage
+    private storage: Storage,
+    private file: File
   ) {
     this.initializeApp();
   }
@@ -38,8 +40,14 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.storage.get('config').then(val => {
-        initConfig(this.storage, val);
+      this.file.readAsText(this.file.dataDirectory, 'setting.json')
+      .then(config => {
+        console.log('[setting.json]', config);
+        initConfig(this.storage, config);
+      })
+      .catch(err => {
+        console.log(err);
+        initConfig(this.storage);
       });
     });
   }

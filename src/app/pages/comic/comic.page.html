@@ -1,11 +1,11 @@
-<ion-header mode="md">
+<ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-segment scrollable [(ngModel)]="segment">
-      <ion-segment-button value="favorites">Favorites</ion-segment-button>
-      <ion-segment-button value="download">Download</ion-segment-button>
+      <ion-segment-button value="favorites">收藏</ion-segment-button>
+      <ion-segment-button value="download">下载</ion-segment-button>
     </ion-segment>
     <ion-buttons slot="end">
       <ion-button (click)="this.segment = 'search'">
@@ -14,7 +14,7 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color="primary" [hidden]="segment !== 'search'">
-    <ion-searchbar #searchBar animated="true" [(ngModel)]="queryText" placeholder="Search" (keyup.enter)="doSearch()"></ion-searchbar>
+    <ion-searchbar #searchBar animated="true" [(ngModel)]="queryText" placeholder="搜索" (keyup.enter)="doSearch()"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 

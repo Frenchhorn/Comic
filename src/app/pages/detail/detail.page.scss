@@ -1,0 +1,60 @@
+// 头部
+.header-md {
+  &::after {
+    height: 0;
+  }
+}
+
+// 图片、标题、简介
+ion-card {
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+ion-card-header {
+  padding: 0;
+}
+
+ion-thumbnail {
+  height: auto;
+  width: auto;
+  max-width: 70px;
+  margin-top: 0;
+  margin-right: 8px;
+}
+
+ion-label {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.author {
+  font-size: 12px;
+}
+
+.description {
+  font-size: 10px;
+  height: 40px;
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+}
+
+// 章节
+ion-grid {
+  padding: 0;
+}
+
+ion-row {
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+ion-col {
+  padding: 0;
+  text-align: center;
+}
