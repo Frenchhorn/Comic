@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DetailPage } from './detail.page';
+import { DetailPage, PopoverMorePage } from './detail.page';
 
 const routes: Routes = [
   {
@@ -21,6 +21,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [DetailPage]
+  declarations: [DetailPage, PopoverMorePage],
+  entryComponents: [PopoverMorePage]
 })
 export class DetailPageModule {}

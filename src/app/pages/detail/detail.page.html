@@ -6,6 +6,17 @@
       </ion-button>
     </ion-buttons>
     <ion-title>详情</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="time"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="download"></ion-icon>
+      </ion-button>
+      <ion-button (click)="showMore($event)">
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

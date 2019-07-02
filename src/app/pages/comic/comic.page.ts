@@ -4,6 +4,7 @@ import { getSearchResult } from '../../functions/cache';
 import { Source, SourceName } from '../../constants/source';
 import { Comic } from '../../interface/comic';
 import { Sources } from '../../sources/sources';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-comic',
@@ -73,7 +74,18 @@ export class ComicPage implements OnInit {
 
   constructor(
     public loadingController: LoadingController,
-    public sources: Sources) { }
+    public sources: Sources,
+    public route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params.tab) {
+        this.segment = params.tab;
+      }
+      if (params.keyword) {
+        this.queryText = params.keyword;
+      }
+    });
+  }
 
   ngOnInit() {
   }
