@@ -15,6 +15,11 @@ ion-card {
 
 ion-card-header {
   padding: 0;
+
+  ion-label {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
 }
 
 ion-thumbnail {
@@ -23,11 +28,6 @@ ion-thumbnail {
   max-width: 70px;
   margin-top: 0;
   margin-right: 8px;
-}
-
-ion-label {
-  margin-top: 0;
-  margin-bottom: 20px;
 }
 
 .author {
@@ -42,19 +42,4 @@ ion-label {
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
-}
-
-// 章节
-ion-grid {
-  padding: 0;
-}
-
-ion-row {
-  margin-left: -8px;
-  margin-right: -8px;
-}
-
-ion-col {
-  padding: 0;
-  text-align: center;
 }

@@ -41,17 +41,17 @@
           <span *ngIf="comic?.update" [style.font-size.px]="10" [style.float]="'right'">最后更新：{{comic?.update}}</span>
         </p>
       </ion-list>
-      <ion-list>
-        <ion-grid fixed="true">
-          <ion-row>
-            <ion-col align-self-center size="3" sizeMd="2" *ngFor="let chapter of comic?.chapters">
-              <ion-button size="small" shape="round"
-                          [fill]="chapter.name === comic.chapter ? 'solid' : 'outline'" 
-                          [color]="chapter.name === comic.chapter ? '' : 'medium'">{{chapter.name}}</ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-list>
+      <p>
+        <ion-chip *ngFor="let chapter of comic?.chapters" [outline]="chapter.name === comic.chapter ? false : true" [color]="chapter.name === comic.chapter ? 'primary' : ''">
+          <ion-label>{{chapter.name}}</ion-label>
+        </ion-chip>
+      </p>
     </ion-card-content>
   </ion-card>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="toggleFavorite();">
+      <ion-icon [name]="comic.favorite ? 'heart' : 'heart-empty'"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

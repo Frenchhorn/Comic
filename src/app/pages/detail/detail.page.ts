@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingController, PopoverController } from '@ionic/angular';
+import { LoadingController, PopoverController, ToastController } from '@ionic/angular';
 import { Sources } from '../../sources/sources';
 import { Comic } from '../../interface/comic';
 import { getComicDetail } from '../../functions/cache';
@@ -59,6 +59,7 @@ export class DetailPage implements OnInit {
     finish: true,
     update: '2019-01-01',
     chapter: '第1话',
+    favorite: true,
     chapters: [
       {name: '第1话'},
       {name: '第2话'},
@@ -73,7 +74,8 @@ export class DetailPage implements OnInit {
     private route: ActivatedRoute,
     public loadingController: LoadingController,
     public sources: Sources,
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
+    public toastController: ToastController
   ) {
     this.source = this.route.snapshot.paramMap.get('source') as Source;
     this.cid = this.route.snapshot.paramMap.get('cid');
@@ -108,4 +110,13 @@ export class DetailPage implements OnInit {
     return await popover.present();
   }
 
+  async toggleFavorite() {
+    this.comic.favorite = !this.comic.favorite;
+    const toast = await this.toastController.create({
+      message: this.comic.favorite ? '已收藏' : '取消收藏',
+      duration: 1000,
+      translucent: true
+    });
+    toast.present();
+  }
 }
